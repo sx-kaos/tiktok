@@ -1,4 +1,3 @@
-
 import os
 import time
 import asyncio
@@ -49,9 +48,15 @@ class Checker:
 if __name__ == '__main__':
     system('cls && title username checker made by kaos [https://dsc.gg/kaos]')
 
-    with open('usernames.txt', encoding='UTF-8') as f:
-        username_list = [line.strip() for line in f]
+    try:
+        with open('usernames.txt', encoding='UTF-8') as f:
+            username_list = [line.strip() for line in f]
+    except FileNotFoundError:
+        print("Please make a file called 'usernames.txt' and put the usernames you wanna check in there")
+        input()
 
     checker = Checker(username_list)
     loop = asyncio.get_event_loop()
     loop.run_until_complete(checker.start())
+    print("Press enter to exit")
+    input()
